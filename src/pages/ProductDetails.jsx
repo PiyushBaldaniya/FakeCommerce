@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { addToCart, removeFromCart } from "../redux/slices/cartSlice";
-
+import { addToWishlist,removeFromWishlist } from "../redux/slices/wishlistSlice";
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -35,6 +35,16 @@ const ProductDetail = () => {
                 <button onClick={() => dispatch(removeFromCart(product))}
                 className="bg-blue-500 text-white px-4 py-2 rounded">
                 Remove From Cart</button>
+        </div>
+
+        <div class="flex flex-row">
+                <button onClick={() => dispatch(addToWishlist(product))}
+                className="bg-blue-500 text-white px-4 py-2 rounded">
+                Add to wishlist</button>
+
+                <button onClick={() => dispatch(removeFromWishlist(product))}
+                className="bg-blue-500 text-white px-4 py-2 rounded">
+                Remove From wishlist</button>
         </div>
       
 

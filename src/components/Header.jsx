@@ -64,6 +64,7 @@ export default function Header() {
           <Link to="/Product" className="text-sm/6 font-semibold text-gray-900" >Products</Link>
           <Link to="/Wishlist" className="text-sm/6 font-semibold text-gray-900">Wishlist</Link>
           <Link to="/Profile" className="text-sm/6 font-semibold text-gray-900">Profile</Link>
+          <Link to="/Cart" className="text-sm/6 font-semibold text-gray-900">Cart</Link>
         </PopoverGroup>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
           <a href="#" className="text-sm/6 font-semibold text-gray-900">
