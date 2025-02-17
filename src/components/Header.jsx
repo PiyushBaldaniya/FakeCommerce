@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState,useContext, useEffect } from 'react'
 import {
   Dialog,
   DialogPanel,
@@ -21,6 +21,8 @@ import {
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/react/20/solid'
 import { Link } from "react-router-dom";
+import {AuthContext} from "../context/usercontext"
+
 
 const products = [
   { name: 'Analytics', description: 'Get a better understanding of your traffic', href: '#', icon: ChartPieIcon },
@@ -36,6 +38,11 @@ const callsToAction = [
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const {isAuthenticated,logout} = useContext(AuthContext);
+
+  useEffect(()=>{
+    console.log(isAuthenticated);
+  },[isAuthenticated]);
 
   return (
     <header className="bg-white">
@@ -63,13 +70,15 @@ export default function Header() {
         <PopoverGroup className="hidden lg:flex lg:gap-x-12">
           <Link to="/Product" className="text-sm/6 font-semibold text-gray-900" >Products</Link>
           <Link to="/Wishlist" className="text-sm/6 font-semibold text-gray-900">Wishlist</Link>
-          <Link to="/Profile" className="text-sm/6 font-semibold text-gray-900">Profile</Link>
           <Link to="/Cart" className="text-sm/6 font-semibold text-gray-900">Cart</Link>
+          <Link to="/Profile" className="text-sm/6 font-semibold text-gray-900">Profile</Link>
         </PopoverGroup>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a href="#" className="text-sm/6 font-semibold text-gray-900">
-            Log in <span aria-hidden="true">&rarr;</span>
-          </a>
+          {
+            (!isAuthenticated) ?  <Link to="/Login" className="text-sm/6 font-semibold text-gray-900"> Log in <span aria-hidden="true">&rarr;</span></Link> : 
+            <button onClick={logout}  className="text-sm/6 font-semibold text-gray-900"> Log Out<span aria-hidden="true">&rarr;</span></button> 
+          }
+          
         </div>
       </nav>
       <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden">
